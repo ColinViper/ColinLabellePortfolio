@@ -3,16 +3,23 @@ import { Link } from "react-router-dom";
 
 const StyledNavBar = styled.nav`
   background: white;
+  box-sizing: border-box;
   width: 100vw;
   display: flex;
   justify-content: space-evenly;
-  position: sticky;
+  position: absolute;
   top: 0;
   align-items: center;
-  padding: 2rem 0;
-  padding-left: 20rem;
-  gap: 10rem;
+  padding: 0 2rem;
   z-index: 999;
+
+  @media screen and (max-width: 1000px) {
+    padding: 1rem 0;
+  }
+
+  @media screen and (max-width: 600px) {
+    padding: 0.5rem 0;
+  }
 `;
 
 const NavigationLink = styled(Link)`
@@ -20,28 +27,45 @@ const NavigationLink = styled(Link)`
   text-decoration: none;
   font-weight: bold;
   font-size: 1.5rem;
-  margin: 0 5rem;
+  margin: 0 4rem;
+
+  @media screen and (max-width: 1000px) {
+    font-size: 1rem;
+    margin: 0 2rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 0.5rem;
+    margin: 0 1rem;
+  }
 
   &:hover {
     color: #5cb9f0;
   }
 `;
 
-const Name = styled.span`
-  color: black;
+const Name = styled.h2`
   font-weight: bold;
   font-size: 2rem;
+
+  @media screen and (max-width: 1000px) {
+    font-size: 1rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 0.5rem;
+  }
 `;
 
 const Navbar = () => {
   return (
-    <StyledNavBar>
+    <StyledNavBar id="navbar">
       <Name>Colin Labelle</Name>
       <div>
-        <NavigationLink to="/">Home</NavigationLink>
+        <NavigationLink style={{marginLeft: "0"}} to="/">Home</NavigationLink>
         <NavigationLink to="/about">About</NavigationLink>
         <NavigationLink to="/work">Work</NavigationLink>
-        <NavigationLink to="/contact">Contact</NavigationLink>
+        <NavigationLink style={{marginRight: "0"}} to="/contact">Contact</NavigationLink>
       </div>
     </StyledNavBar>
   );

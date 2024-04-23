@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
+import NavbarSize from "../NavbarSize";
 import styled from "styled-components";
 
 const Container = styled.div`
-  height: calc(100vh - 8rem);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  margin-top: ${({ navbarHeight }) => `${navbarHeight}px`};
 `;
 
 const AboutMe = styled.div`
   font-size: 2rem;
   max-width: 100rem;
+
+  @media screen and (max-width: 900px) {
+    font-size: 1rem;
+  }
 `;
 
 const TopHalf = styled.div`
@@ -24,6 +29,7 @@ const TopHalf = styled.div`
   align-items: center;
   background-color: #5cb9f0;
   font-size: 4rem;
+  text-align: center;
 `;
 
 const BottomHalf = styled.div`
@@ -34,38 +40,92 @@ const BottomHalf = styled.div`
   justify-content: center;
 `;
 
+const Title = styled.h2`
+  font-size: 4rem;
+
+  @media screen and (max-width: 900px) {
+    font-size: 3rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 2rem;
+  }
+`;
+
 const AboutMeTitle = styled.div`
+  font-size: 4rem;
   padding: 3rem;
   text-align: center;
+
+  @media screen and (max-width: 900px) {
+    font-size: 2rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 1rem;
+  }
+`;
+
+const Name = styled.div`
+  font-size: 9rem;
+  font-weight: bold;
+  margin-bottom: 0;
+
+  @media screen and (max-width: 900px) {
+    font-size: 5rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 3rem;
+  }
+`;
+
+const NameText = styled.div`
+  font-size: 5rem;
+  font-weight: bold;
+  text-align: center;
+
+  @media screen and (max-width: 900px) {
+    font-size: 3.5rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 2rem;
+  }
 `;
 
 const Home = () => {
+  const [navbarHeight, setNavbarHeight] = useState(0);
+
   return (
-    <Container>
-      <TopHalf>
-        <h1 style={{ marginBottom: "0" }}>Colin Labelle</h1>
-        <h2>Junior Full Stack Web Developer</h2>
-      </TopHalf>
-      <BottomHalf>
-        <AboutMeTitle>
-          <h2 style={{ fontSize: "4rem" }}>About Me</h2>
-          <AboutMe>
-            <p style={{ paddingTop: "5rem" }}>
-              I am a junior web dev with a passion for coding and design
-              aspiring to create seamless digital experiences that captivates
-              and engages. With a background of game development, a keen eye for
-              detail and a commitment to innovation, I strive to bring
-              creativity and functionality to every project I undertake.
-            </p>
-            <p>
-              I thrive in dynamic environments where collaboration and
-              continuous learning are encouraged, and I'm excited about the
-              opportunity to contribute my skills to innovative projects.
-            </p>
-          </AboutMe>
-        </AboutMeTitle>
-      </BottomHalf>
-    </Container>
+    <>
+      <NavbarSize onNavbarHeightChange={setNavbarHeight} />
+      <Container navbarHeight={navbarHeight}>
+        <TopHalf>
+          <Name>Colin Labelle</Name>
+          <NameText>Junior Full Stack Web Developer</NameText>
+        </TopHalf>
+        <BottomHalf>
+          <AboutMeTitle>
+            <Title>About Me</Title>
+            <AboutMe>
+              <p style={{ paddingTop: "5rem" }}>
+                I am a junior web dev with a passion for coding and design
+                aspiring to create seamless digital experiences that captivates
+                and engages. With a background of game development, a keen eye
+                for detail and a commitment to innovation, I strive to bring
+                creativity and functionality to every project I undertake.
+              </p>
+              <p>
+                I thrive in dynamic environments where collaboration and
+                continuous learning are encouraged, and I'm excited about the
+                opportunity to contribute my skills to innovative projects.
+              </p>
+            </AboutMe>
+          </AboutMeTitle>
+        </BottomHalf>
+      </Container>
+    </>
   );
 };
 

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import NavbarSize from "../NavbarSize";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -7,13 +8,24 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #5cb9f0;
-  height: 100vh;
+  box-sizing: border-box;
+  width: 100vw;
+  min-height: 100vh;
+  margin-top: ${({ navbarHeight }) => `${navbarHeight}px`};
 `;
 
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
+
+  @media screen and (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 600px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 const SectionWrapper = styled.a`
@@ -35,10 +47,25 @@ const Section = styled.section`
   text-align: center;
 `;
 
+const PageTitle = styled.h2`
+  font-size: 5rem;
+  margin-bottom: 15rem;
+  margin-top: 0;
+
+  @media screen and (max-width: 900px) {
+    font-size: 3rem;
+    margin-bottom: 7rem;
+  }
+`;
+
 const Title = styled.h2`
   font-size: 2rem;
   margin-bottom: 1rem;
   color: black;
+
+  @media screen and (max-width: 900px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Paragraph = styled.p`
@@ -50,10 +77,13 @@ const Paragraph = styled.p`
 `;
 
 const Work = () => {
+  const [navbarHeight, setNavbarHeight] = useState(0);
+
   return (
-    <div>
-      <Title style={{ fontSize: "5rem", marginBottom: "4rem", position: "absolute", left: "50%", transform: "translate(-50%)" }}>My Work</Title>
-      <Container>
+    <>
+    <NavbarSize onNavbarHeightChange={setNavbarHeight} />
+      <Container navbarHeight={navbarHeight}>
+      <PageTitle>My Work</PageTitle>
         <GridContainer>
           <SectionWrapper href="/work1">
             <Section>
@@ -98,7 +128,7 @@ const Work = () => {
           </SectionWrapper>
         </GridContainer>
       </Container>
-    </div>
+      </>
   );
 };
 

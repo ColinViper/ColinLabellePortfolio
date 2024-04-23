@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import NavbarSize from "../NavbarSize";
 import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
+  box-sizing: border-box;
+  width: 100vw;
+  min-height: 100vh;
   flex-direction: column;
   align-items: center;
   background-color: #5cb9f0;
   padding: 2rem;
+  margin-top: ${({ navbarHeight }) => `${navbarHeight}px`};
 `;
 
 const SectionWrapper = styled.div`
@@ -15,6 +20,9 @@ const SectionWrapper = styled.div`
   border-radius: 10px;
   margin-bottom: 2rem;
   width: 60%;
+  @media screen and (max-width: 900px) {
+    width: 90%;
+  }
 `;
 
 const Section = styled.section`
@@ -25,6 +33,10 @@ const Title = styled.h2`
   font-size: 2rem;
   margin-bottom: 1rem;
   text-align: center;
+
+  @media screen and (max-width: 900px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Paragraph = styled.p`
@@ -32,6 +44,10 @@ const Paragraph = styled.p`
   line-height: 1.6;
   max-width: 100rem;
   text-align: center;
+
+  @media screen and (max-width: 900px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const BoldText = styled.span`
@@ -39,9 +55,13 @@ const BoldText = styled.span`
 `;
 
 const About = () => {
+  const [navbarHeight, setNavbarHeight] = useState(0);
+
   return (
-    <Container>
-      <Title style={{ fontSize: "5rem", marginBottom: "4rem" }}>About Me</Title>
+    <>
+    <NavbarSize onNavbarHeightChange={setNavbarHeight} />
+    <Container navbarHeight={navbarHeight}>
+      <Title style={{ fontSize: "3rem", marginBottom: "2rem" }}>About Me</Title>
 
       <SectionWrapper>
         <Section>
@@ -99,6 +119,7 @@ const About = () => {
         </Section>
       </SectionWrapper>
     </Container>
+    </>
   );
 };
 
