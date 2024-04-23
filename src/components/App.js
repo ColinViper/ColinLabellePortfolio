@@ -14,12 +14,12 @@ import Contact from "./Contact/Contact";
 
 const App = () => {
   return (
-    <Router>
+    <Router basename="/ColinLabellePortfolio">
       <GlobalStyles />
       <Navbar />
       <ScrollToTop />
       <Switch>
-          <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/work" element={<Work />} />
         <Route path="/contact" element={<Contact />} />
